@@ -1,12 +1,13 @@
 # OR-lab1: Skup podataka o hotelima u Hrvatskoj
 # Autor
-Anamarija Jakoubek
+  Anamarija Jakoubek
 # Licenca 
 Creative Commons Zero v1.0 Universal
 # Verzija: 1.0
 # Jezik: Hrvatski
 # Godina prikupljanja podataka: 2023
-# Prostorni obuhvat: Republika Hrvatska
+# Prostorni obuhvat:
+  Republika Hrvatska
 # Popis datoteka
   hoteli.json, hoteli.csv, hoteli_dump.sql, LICENCE, README.md
 # Opis atributa
