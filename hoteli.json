@@ -1,0 +1,394 @@
+{
+    "hoteli": [
+        {
+            "idhotela": 1,
+            "naziv": "D-Resort",
+            "lokacija": "Šibenik",
+            "adresa": {
+                "ulica": "Obala Jerka Šižgorića",
+                "kucnibroj": "1",
+                "postanskibroj": "22000"
+            },
+            "brojzvjezdica": 4,
+            "bazen": 2,
+            "restoran": 2,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Da",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 22 331 452",
+                "email": "info@dresortsibenik.com",
+                "webstranica": "https://dresortsibenik.com/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Lana",
+                    "ocjena": 4,
+                    "komentar": "Prekrasno mjesto uz more."
+                },
+                {
+                    "korisnik": "Ivan",
+                    "ocjena": 5,
+                    "komentar": "Savršena usluga i restorani."
+                },
+                {
+                    "korisnik": "Petra",
+                    "ocjena": 4,
+                    "komentar": "Bazen je bio odličan."
+                }
+            ]
+        },
+        {
+            "idhotela": 2,
+            "naziv": "Sun Gardens",
+            "lokacija": "Dubrovnik",
+            "adresa": {
+                "ulica": "Na Moru",
+                "kucnibroj": "1",
+                "postanskibroj": "20235"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 5,
+            "restoran": 6,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Ne",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 (0)20 361 500",
+                "email": "info@sungardensdubrovnik.com",
+                "webstranica": "https://www.dubrovniksungardens.com/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Mia",
+                    "ocjena": 4,
+                    "komentar": "Puno sadržaja za djecu."
+                },
+                {
+                    "korisnik": "Nikola",
+                    "ocjena": 3,
+                    "komentar": "Pogled iz sobe nije bio impresivan."
+                },
+                {
+                    "korisnik": "Ivana",
+                    "ocjena": 5,
+                    "komentar": "Savršen odmor uz bazen."
+                }
+            ]
+        },
+        {
+            "idhotela": 3,
+            "naziv": "Villa Dubrovnik",
+            "lokacija": "Ploče",
+            "adresa": {
+                "ulica": "Vlaha Bukovca",
+                "kucnibroj": "6",
+                "postanskibroj": "20000"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 1,
+            "restoran": 1,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Da",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 20 500 300",
+                "email": "reservations@villa-dubrovnik.hr",
+                "webstranica": "https://www.villa-dubrovnik.hr/hr/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Klara",
+                    "ocjena": 5,
+                    "komentar": "Savršen odmor u Villi Dubrovnik!"
+                },
+                {
+                    "korisnik": "Marko",
+                    "ocjena": 4,
+                    "komentar": "Lijepa plaža i restoran."
+                },
+                {
+                    "korisnik": "Hrvoje",
+                    "ocjena": 4,
+                    "komentar": "Opuštajući spa centar."
+                }
+            ]
+        },
+        {
+            "idhotela": 4,
+            "naziv": "Monte Mulini",
+            "lokacija": "Rovinj",
+            "adresa": {
+                "ulica": "V.Nazota",
+                "kucnibroj": "6",
+                "postanskibroj": "52210"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 2,
+            "restoran": 3,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Da",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 52 808 000",
+                "email": "hello@maistra.hr",
+                "webstranica": "https://www.maistra.com/hr/smjestaj/hotel-monte-mulini/#/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Eva",
+                    "ocjena": 5,
+                    "komentar": "Prekrasna lokacija i pogled na more."
+                },
+                {
+                    "korisnik": "Filip",
+                    "ocjena": 4,
+                    "komentar": "Usluga u restoranu bila odlična."
+                },
+                {
+                    "korisnik": "Luka",
+                    "ocjena": 5,
+                    "komentar": "Osoblje je bilo vrlo ljubazno."
+                }
+            ]
+        },
+        {
+            "idhotela": 5,
+            "naziv": "Esplanade Zagreb",
+            "lokacija": "Zagreb",
+            "adresa": {
+                "ulica": "Mihanovićeva",
+                "kucnibroj": "1",
+                "postanskibroj": "Donji Grad"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 0,
+            "restoran": 2,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Da",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "00 385 1 45 666 66",
+                "email": "info@esplanade.hr",
+                "webstranica": "https://esplanade.hr/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Lucija",
+                    "ocjena": 4,
+                    "komentar": "Elegantan hotel u centru grada."
+                },
+                {
+                    "korisnik": "Jakov",
+                    "ocjena": 3,
+                    "komentar": "Nedostatak besplatnog doručka."
+                },
+                {
+                    "korisnik": "Elena",
+                    "ocjena": 5,
+                    "komentar": "Savršen boravak u luksuznom hotelu."
+                }
+            ]
+        },
+        {
+            "idhotela": 6,
+            "naziv": "Kempinski Hotel Adriatic",
+            "lokacija": "Savudrija",
+            "adresa": {
+                "ulica": "Alberi",
+                "kucnibroj": "300a",
+                "postanskibroj": "52475"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 1,
+            "restoran": 2,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Da",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 52 707 000",
+                "email": "reservation.adriatic@kempinski.com",
+                "webstranica": "https://www.kempinski.com/hr/hotel-adriatic"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Juraj",
+                    "ocjena": 5,
+                    "komentar": "Odličan spa centar i bazen."
+                },
+                {
+                    "korisnik": "Elena",
+                    "ocjena": 5,
+                    "komentar": "Savršen odmor uz more."
+                },
+                {
+                    "korisnik": "Nina",
+                    "ocjena": 4,
+                    "komentar": "Predivan pogled na more."
+                }
+            ]
+        },
+        {
+            "idhotela": 7,
+            "naziv": "Aminess Khalani Beach Hotel",
+            "lokacija": "Makarska",
+            "adresa": {
+                "ulica": "Ulica Ivana Gorana Kovačića",
+                "kucnibroj": "14",
+                "postanskibroj": "21300"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 4,
+            "restoran": 2,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Ne",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 52 858 600",
+                "email": "reservations@aminess.com",
+                "webstranica": "https://www.aminess.com/hr/aminess-khalani-beach-hotel"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Hana",
+                    "ocjena": 3,
+                    "komentar": "Nedostatak restorana u blizini."
+                },
+                {
+                    "korisnik": "Igor",
+                    "ocjena": 4,
+                    "komentar": "Lijepa plaža."
+                },
+                {
+                    "korisnik": "Petar",
+                    "ocjena": 4,
+                    "komentar": "Dobra zabava na plaži."
+                }
+            ]
+        },
+        {
+            "idhotela": 8,
+            "naziv": "Miramare",
+            "lokacija": "Crikvenica",
+            "adresa": {
+                "ulica": "Ulica bana Josipa Jelačića",
+                "kucnibroj": "2",
+                "postanskibroj": "51260"
+            },
+            "brojzvjezdica": 5,
+            "bazen": 1,
+            "restoran": 1,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Da",
+            "fitnesscentar": "Da",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 51 707 100",
+                "email": "booking@miramare.hr",
+                "webstranica": "https://www.miramare.hr/hr/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Stjepan",
+                    "ocjena": 4,
+                    "komentar": "Udobne sobe i ljubazno osoblje."
+                },
+                {
+                    "korisnik": "Klara",
+                    "ocjena": 4,
+                    "komentar": "Predivan pogled na more."
+                },
+                {
+                    "korisnik": "Ivana",
+                    "ocjena": 5,
+                    "komentar": "Savršena lokacija uz obalu."
+                }
+            ]
+        },
+        {
+            "idhotela": 9,
+            "naziv": "Time Boutique",
+            "lokacija": "Split",
+            "adresa": {
+                "ulica": "Vukovarska",
+                "kucnibroj": "35b",
+                "postanskibroj": "21000"
+            },
+            "brojzvjezdica": 4,
+            "bazen": 1,
+            "restoran": 1,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Ne",
+            "fitnesscentar": "Ne",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 (0)95 222 9092",
+                "email": "info@hoteltimesplit.com",
+                "webstranica": "https://hoteltimesplit.com/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Lara",
+                    "ocjena": 5,
+                    "komentar": "Prekrasan pogled na more iz sobe."
+                },
+                {
+                    "korisnik": "Ivan",
+                    "ocjena": 4,
+                    "komentar": "Usluga u restoranu bila dobra."
+                },
+                {
+                    "korisnik": "Petra",
+                    "ocjena": 5,
+                    "komentar": "Osoblje je bilo iznimno susretljivo."
+                }
+            ]
+        },
+        {
+            "idhotela": 10,
+            "naziv": "Florian&Godler",
+            "lokacija": "Karlovac",
+            "adresa": {
+                "ulica": "Banija ulica",
+                "kucnibroj": "15",
+                "postanskibroj": "47000"
+            },
+            "brojzvjezdica": 4,
+            "bazen": 0,
+            "restoran": 1,
+            "besplatanwifi": "Da",
+            "kucniljubimci": "Ne",
+            "fitnesscentar": "Ne",
+            "spawellnesscentar": "Da",
+            "kontakt": {
+                "telefon": "+385 47 640138",
+                "email": "info@floriangodler.hr",
+                "webstranica": "https://floriangodler.hr/"
+            },
+            "recenzije": [
+                {
+                    "korisnik": "Dino",
+                    "ocjena": 3,
+                    "komentar": "Dobar doručak, ali male sobe."
+                },
+                {
+                    "korisnik": "Mia",
+                    "ocjena": 5,
+                    "komentar": "Odlična lokacija u centru grada."
+                },
+                {
+                    "korisnik": "Filip",
+                    "ocjena": 4,
+                    "komentar": "Lijep vrt i terasa za opuštanje."
+                }
+            ]
+        }
+    ]
+}
