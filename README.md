@@ -8,6 +8,8 @@ Creative Commons Zero v1.0 Universal
 # Jezik: Hrvatski
 # Godina prikupljanja podataka: 2023
 # Prostorni obuhvat: Republika Hrvatska
+# Popis datoteka
+  hoteli.json, hoteli.csv, hoteli_dump.sql
 # Opis atributa
   Naziv: Naziv hotela
   Lokacija: Grad/mjesto u kojem se hotel nalazi
