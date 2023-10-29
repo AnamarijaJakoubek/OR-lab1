@@ -6,3 +6,17 @@ Anamarija Jakoubek
 Creative Commons Zero v1.0 Universal
 # Verzija: 1.0
 # Jezik: Hrvatski
+# Opis atributa
+  Naziv: Naziv hotela
+  Lokacija: Grad/mjesto u kojem se hotel nalazi
+  Adresa: Ulica, kucni broj, postanski broj
+  Broj zvjezdica:
+  Bazen:
+  Restoran:
+  Besplatan wifi: Nudi li hotel besplatan wifi
+  Kućni ljubimci: Je li dozvoljen boravak kućnim ljubimcima
+  Fitness centar: 
+  Spa i wellness centar:
+  Kontakt:
+  Recenzije: 
+  
