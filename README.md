@@ -1,4 +1,5 @@
-# OR-lab1: Skup podataka o hotelima u Hrvatskoj
+# Skup podataka o hotelima u Hrvatskoj
+  Prva laboratorijska vježba iz kolegija Otvoreno računarstvo
 # Autor
   Anamarija Jakoubek
 # Licenca 
