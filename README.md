@@ -13,12 +13,12 @@ Creative Commons Zero v1.0 Universal
   Lokacija: Grad/mjesto u kojem se hotel nalazi
   Adresa: Ulica, kucni broj, postanski broj
   Broj zvjezdica:
-  Bazen:
-  Restoran:
+  Bazen: Broj bazena u sklopu hotela
+  Restoran: Broj restorana u sklopu hotela
   Besplatan wifi: Nudi li hotel besplatan wifi
   Kućni ljubimci: Je li dozvoljen boravak kućnim ljubimcima
-  Fitness centar: 
-  Spa i wellness centar:
-  Kontakt:
+  Fitness centar: Sadrži li hotel fitness centar
+  Spa i wellness centar: Sadrži li hotel spa i wellness centar
+  Kontakt: Broj telefona, e-mail, web stranica
   Recenzije: 
   
