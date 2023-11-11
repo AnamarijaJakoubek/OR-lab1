@@ -1,0 +1,31 @@
+idhotela,naziv,lokacija,ulica,kucnibroj,postanskibroj,brojzvjezdica,bazen,restoran,besplatanwifi,kucniljubimci,fitnesscentar,spawellnesscentar,telefon,email,webstranica,korisnik,ocjena,komentar
+1,D-Resort,Šibenik,Obala Jerka Šižgorića,1,22000,4,2,2,Da,Da,Da,Da,+385 22 331 452,info@dresortsibenik.com,https://dresortsibenik.com/,Lana,4,Prekrasno mjesto uz more.
+1,D-Resort,Šibenik,Obala Jerka Šižgorića,1,22000,4,2,2,Da,Da,Da,Da,+385 22 331 452,info@dresortsibenik.com,https://dresortsibenik.com/,Ivan,5,Savršena usluga i restorani.
+1,D-Resort,Šibenik,Obala Jerka Šižgorića,1,22000,4,2,2,Da,Da,Da,Da,+385 22 331 452,info@dresortsibenik.com,https://dresortsibenik.com/,Petra,4,Bazen je bio odličan.
+2,Sun Gardens,Dubrovnik,Na Moru,1,20235,5,5,6,Da,Ne,Da,Da,+385 (0)20 361 500,info@sungardensdubrovnik.com,https://www.dubrovniksungardens.com/,Mia,4,Puno sadržaja za djecu.
+2,Sun Gardens,Dubrovnik,Na Moru,1,20235,5,5,6,Da,Ne,Da,Da,+385 (0)20 361 500,info@sungardensdubrovnik.com,https://www.dubrovniksungardens.com/,Nikola,3,Pogled iz sobe nije bio impresivan.
+2,Sun Gardens,Dubrovnik,Na Moru,1,20235,5,5,6,Da,Ne,Da,Da,+385 (0)20 361 500,info@sungardensdubrovnik.com,https://www.dubrovniksungardens.com/,Ivana,5,Savršen odmor uz bazen.
+3,Villa Dubrovnik,Ploče,Vlaha Bukovca,6,20000,5,1,1,Da,Da,Da,Da,+385 20 500 300,reservations@villa-dubrovnik.hr,https://www.villa-dubrovnik.hr/hr/,Klara,5,Savršen odmor u Villi Dubrovnik!
+3,Villa Dubrovnik,Ploče,Vlaha Bukovca,6,20000,5,1,1,Da,Da,Da,Da,+385 20 500 300,reservations@villa-dubrovnik.hr,https://www.villa-dubrovnik.hr/hr/,Marko,4,Lijepa plaža i restoran.
+3,Villa Dubrovnik,Ploče,Vlaha Bukovca,6,20000,5,1,1,Da,Da,Da,Da,+385 20 500 300,reservations@villa-dubrovnik.hr,https://www.villa-dubrovnik.hr/hr/,Hrvoje,4,Opuštajući spa centar.
+4,Monte Mulini,Rovinj,V.Nazota,6,52210,5,2,3,Da,Da,Da,Da,+385 52 808 000,hello@maistra.hr,https://www.maistra.com/hr/smjestaj/hotel-monte-mulini/#/,Eva,5,Prekrasna lokacija i pogled na more.
+4,Monte Mulini,Rovinj,V.Nazota,6,52210,5,2,3,Da,Da,Da,Da,+385 52 808 000,hello@maistra.hr,https://www.maistra.com/hr/smjestaj/hotel-monte-mulini/#/,Filip,4,Usluga u restoranu bila odlična.
+4,Monte Mulini,Rovinj,V.Nazota,6,52210,5,2,3,Da,Da,Da,Da,+385 52 808 000,hello@maistra.hr,https://www.maistra.com/hr/smjestaj/hotel-monte-mulini/#/,Luka,5,Osoblje je bilo vrlo ljubazno.
+5,Esplanade Zagreb,Zagreb,Mihanovićeva,1,10000,5,0,2,Da,Da,Da,Da,00 385 1 45 666 66,info@esplanade.hr,https://esplanade.hr/,Lucija,4,Elegantan hotel u centru grada.
+5,Esplanade Zagreb,Zagreb,Mihanovićeva,1,10000,5,0,2,Da,Da,Da,Da,00 385 1 45 666 66,info@esplanade.hr,https://esplanade.hr/,Jakov,3,Nedostatak besplatnog doručka.
+5,Esplanade Zagreb,Zagreb,Mihanovićeva,1,10000,5,0,2,Da,Da,Da,Da,00 385 1 45 666 66,info@esplanade.hr,https://esplanade.hr/,Elena,5,Savršen boravak u luksuznom hotelu.
+6,Kempinski Hotel Adriatic,Savudrija,Alberi,300a,52475,5,1,2,Da,Da,Da,Da,+385 52 707 000,reservation.adriatic@kempinski.com,https://www.kempinski.com/hr/hotel-adriatic,Juraj,5,Odličan spa centar i bazen.
+6,Kempinski Hotel Adriatic,Savudrija,Alberi,300a,52475,5,1,2,Da,Da,Da,Da,+385 52 707 000,reservation.adriatic@kempinski.com,https://www.kempinski.com/hr/hotel-adriatic,Elena,5,Savršen odmor uz more.
+6,Kempinski Hotel Adriatic,Savudrija,Alberi,300a,52475,5,1,2,Da,Da,Da,Da,+385 52 707 000,reservation.adriatic@kempinski.com,https://www.kempinski.com/hr/hotel-adriatic,Nina,4,Predivan pogled na more.
+7,Aminess Khalani Beach Hotel,Makarska,Ulica Ivana Gorana Kovačića,14,21300,5,4,2,Da,Ne,Da,Da,+385 52 858 600,reservations@aminess.com,https://www.aminess.com/hr/aminess-khalani-beach-hotel,Hana,3,Nedostatak restorana u blizini.
+7,Aminess Khalani Beach Hotel,Makarska,Ulica Ivana Gorana Kovačića,14,21300,5,4,2,Da,Ne,Da,Da,+385 52 858 600,reservations@aminess.com,https://www.aminess.com/hr/aminess-khalani-beach-hotel,Igor,4,Lijepa plaža.
+7,Aminess Khalani Beach Hotel,Makarska,Ulica Ivana Gorana Kovačića,14,21300,5,4,2,Da,Ne,Da,Da,+385 52 858 600,reservations@aminess.com,https://www.aminess.com/hr/aminess-khalani-beach-hotel,Petar,4,Dobra zabava na plaži.
+8,Miramare,Crikvenica,Ulica bana Josipa Jelačića,2,51260,5,1,1,Da,Da,Da,Da,+385 51 707 100,booking@miramare.hr,https://www.miramare.hr/hr/,Stjepan,4,Udobne sobe i ljubazno osoblje.
+8,Miramare,Crikvenica,Ulica bana Josipa Jelačića,2,51260,5,1,1,Da,Da,Da,Da,+385 51 707 100,booking@miramare.hr,https://www.miramare.hr/hr/,Klara,4,Predivan pogled na more.
+8,Miramare,Crikvenica,Ulica bana Josipa Jelačića,2,51260,5,1,1,Da,Da,Da,Da,+385 51 707 100,booking@miramare.hr,https://www.miramare.hr/hr/,Ivana,5,Savršena lokacija uz obalu.
+9,Time Boutique,Split,Vukovarska,35b,21000,4,1,1,Da,Ne,Ne,Da,+385 (0)95 222 9092,info@hoteltimesplit.com,https://hoteltimesplit.com/,Lara,5,Prekrasan pogled na more iz sobe.
+9,Time Boutique,Split,Vukovarska,35b,21000,4,1,1,Da,Ne,Ne,Da,+385 (0)95 222 9092,info@hoteltimesplit.com,https://hoteltimesplit.com/,Ivan,4,Usluga u restoranu bila dobra.
+9,Time Boutique,Split,Vukovarska,35b,21000,4,1,1,Da,Ne,Ne,Da,+385 (0)95 222 9092,info@hoteltimesplit.com,https://hoteltimesplit.com/,Petra,5,Osoblje je bilo iznimno susretljivo.
+10,Florian&Godler,Karlovac,Banija ulica,15,47000,4,0,1,Da,Ne,Ne,Da,+385 47 640138,info@floriangodler.hr,https://floriangodler.hr/,Dino,3,"Dobar doručak, ali male sobe."
+10,Florian&Godler,Karlovac,Banija ulica,15,47000,4,0,1,Da,Ne,Ne,Da,+385 47 640138,info@floriangodler.hr,https://floriangodler.hr/,Mia,5,Odlična lokacija u centru grada.
+10,Florian&Godler,Karlovac,Banija ulica,15,47000,4,0,1,Da,Ne,Ne,Da,+385 47 640138,info@floriangodler.hr,https://floriangodler.hr/,Filip,4,Lijep vrt i terasa za opuštanje.
