@@ -1,0 +1,152 @@
+{
+    "$id": "http://example.com/example.json",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "Skup podataka o hotelima u Hrvatskoj",
+    "description": "Schema za reprezentaciju podataka o hotelima u Hrvatskoj",
+    "type": "object",
+    "properties": {
+      "hoteli": {
+        "type": "array",
+        "title": "Hoteli u Hrvatskoj",
+        "description": "Polje hotela u Hrvatskoj",
+        "items": {
+          "type": "object",
+          "title": "Hotel",
+          "description": "Objekt s podatcima o hotelu",
+          "properties": {
+            "idhotela": { 
+                "type": "integer", 
+                "title": "ID Hotela", 
+                "description": "Identifikator hotela" 
+            }, 
+            "naziv": { 
+                "type": "string", 
+                "title": "Naziv", 
+                "description": "Naziv hotela" 
+            },
+            "lokacija": { 
+                "type": "string", 
+                "title": "Lokacija", 
+                "description": "Lokacija hotela" 
+            },
+            "adresa": {
+              "type": "object",
+              "properties": {
+                "ulica": { 
+                    "type": "string", 
+                    "title": "Ulica", 
+                    "description": "Ulica hotela" 
+                },
+                "kucnibroj": { 
+                    "type": "string", 
+                    "title": "Kućni broj", 
+                    "description": "Kućni broj hotela" 
+                },
+                "postanskibroj": { 
+                    "type": "string", 
+                    "title": "Poštanski broj", 
+                    "description": "Poštanski broj hotela" 
+                }
+              },
+              "required": ["ulica", "kucnibroj", "postanskibroj"],
+              "title": "Adresa",
+              "description": "Adresa hotela"
+            },
+            "brojzvjezdica": { 
+                "type": "integer", 
+                "title": "Broj Zvjezdica", 
+                "description": "Broj zvjezdica hotela" 
+            },
+            "bazen": { 
+                "type": "integer", 
+                "title": "Broj Bazen", 
+                "description": "Broj bazena u hotelu" 
+            },
+            "restoran": { 
+                "type": "integer", 
+                "title": "Broj Restoran", 
+                "description": "Broj restorana u hotelu" 
+            },
+            "besplatanwifi": { 
+                "type": "string", 
+                "enum": ["Da", "Ne"], 
+                "title": "Besplatan WiFi", 
+                "description": "Nudi li hotel besplatan wifi" 
+            },
+            "kucniljubimci": { 
+                "type": "string", 
+                "enum": ["Da", "Ne"], 
+                "title": "Kućni Ljubimci", 
+                "description": "Je li dozvoljen boravak kućnim ljubimcima" 
+            },
+            "fitnesscentar": { 
+                "type": "string", 
+                "enum": ["Da", "Ne"], 
+                "title": "Fitness Centar", 
+                "description": "Sadrži li hotel fitness centar" 
+            },
+            "spawellnesscentar": { 
+                "type": "string", 
+                "enum": ["Da", "Ne"], 
+                "title": "Spa i Wellness Centar", 
+                "description": "Sadrži li hotel spa i wellness centar" 
+            },
+            "kontakt": {
+              "type": "object",
+              "properties": {
+                "telefon": { 
+                    "type": "string", 
+                    "title": "Telefon", 
+                    "description": "Broj telefona hotela" 
+                },
+                "email": { 
+                    "type": "string", 
+                    "format": "email", 
+                    "title": "Email", 
+                    "description": "Email adresa hotela" 
+                },
+                "webstranica": { 
+                    "type": "string", 
+                    "format": "uri", 
+                    "title": "Web Stranica",
+                    "description": "Web stranica hotela" 
+                }
+              },
+              "required": ["telefon", "email", "webstranica"],
+              "title": "Kontakt",
+              "description": "Kontakt informacije hotela"
+            },
+            "recenzije": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "korisnik": { 
+                    "type": "string", 
+                    "title": "Korisnik", 
+                    "description": "Korisničko ime recenzenta" 
+                },
+                  "ocjena": { 
+                    "type": "integer", 
+                    "title": "Ocjena", 
+                    "description": "Ocjena hotela od strane recenzenta" 
+                },
+                  "komentar": { 
+                    "type": "string", 
+                    "title": "Komentar", 
+                    "description": "Komentar recenzenta" 
+                }
+                },
+                "required": ["korisnik", "ocjena", "komentar"],
+                "title": "Recenzija",
+                "description": "Recenzije hotela"
+              }
+            }
+          },
+          "required": ["idhotela", "naziv", "lokacija", "adresa", "brojzvjezdica", "bazen", "restoran", "besplatanwifi", "kucniljubimci", "fitnesscentar", "spawellnesscentar", "kontakt", "recenzije"]
+        }
+      }
+    },
+    "required": ["hoteli"]
+  }
+  
