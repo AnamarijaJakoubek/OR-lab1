@@ -1,16 +1,16 @@
 # Skup podataka o hotelima u Hrvatskoj
-  Prva laboratorijska vježba iz kolegija Otvoreno računarstvo
+  Druga laboratorijska vježba iz kolegija Otvoreno računarstvo
 # Autor
   Anamarija Jakoubek
 # Licenca 
 Creative Commons Zero v1.0 Universal
-# Verzija: 1.0
+# Verzija: 2.0
 # Jezik: Hrvatski
 # Godina prikupljanja podataka: 2023
 # Prostorni obuhvat:
   Republika Hrvatska
 # Popis datoteka
-  hoteli.json, hoteli.csv, hoteli_dump.sql, LICENCE, README.md
+  hoteli.json, hoteli.csv, hoteli_dump.sql, LICENCE, README.md, schema.json, frontend, backend
 # Opis atributa
   -	Naziv: Naziv hotela
   - Lokacija: Grad/mjesto u kojem se hotel nalazi
