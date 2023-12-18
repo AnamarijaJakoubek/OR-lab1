@@ -5,6 +5,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
 const corsOptions = {
     origin: 'http://localhost:3000', // Postavite na svoju domenu frontend-a
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -100,6 +101,420 @@ app.post('/filter', async (req, res) => {
       } 
   });
 
-  app.listen(port, () => {
-    console.log(`Server je pokrenut na http://localhost:${port}`);
-  });
+const OpenApi = require('../openapi.json');
+
+//labos3
+
+function wrapResponse(data, message, status) {
+  return {
+      status: status,
+      message: message,
+      data: data
+  };
+}
+
+function wrapData(data) {
+  var hotelsWithReviews = [];
+  for (const hotel of data) {
+      if (hotelsWithReviews.hasOwnProperty(hotel.idhotela)) {
+          const noviReview = {
+              korisnik: hotel.korisnik,
+              ocjena: hotel.ocjena,
+              komentar: hotel.komentar
+          }
+          hotelsWithReviews[hotel.idhotela].recenzije.push(noviReview);
+      } else {
+          hotelsWithReviews[hotel.idhotela]  = {
+              idhotela: hotel.idhotela,
+              naziv: hotel.naziv,
+              lokacija: hotel.lokacija,
+              adresa: {
+                  ulica: hotel.ulica,
+                  kucnibroj: hotel.kucnibroj,
+                  postanskibroj: hotel.postanskibroj
+              },
+              brojzvjezdica: hotel.brojzvjezdica,
+              bazen: hotel.bazen,
+              restoran: hotel.restoran,
+              besplatanwifi: hotel.besplatanwifi,
+              kucniljubimci: hotel.kucniljubimci,
+              fitnesscentar: hotel.fitnesscentar,
+              spawellnesscentar: hotel.spawellnesscentar,
+              kontakt: {
+                  telefon: hotel.telefon,
+                  email: hotel.email,
+                  webstranica: hotel.webstranica
+              },
+              recenzije: [
+                  {
+                      korisnik: hotel.korisnik,
+                      ocjena: hotel.ocjena,
+                      komentar: hotel.komentar
+                  }
+              ]
+              }
+      }
+  }
+finalHotelsWithReviews = hotelsWithReviews.filter(Boolean);
+return finalHotelsWithReviews;
+}
+
+
+//GET /api/getAll - Dohvacanje cjelokupne koleckcija podataka
+app.get('/api/getAll', async(req, res) => {
+  
+  try {
+      const client = await pool.connect();
+      const result = await client.query(
+          `SELECT
+              hoteli.idhotela, hoteli.naziv, hoteli.lokacija, adresa.ulica, adresa.kucnibroj, adresa.postanskibroj,
+              hoteli.brojzvjezdica, hoteli.bazen, hoteli.restoran, hoteli.besplatanwifi, hoteli.kucniljubimci,
+              hoteli.fitnesscentar, hoteli.spawellnesscentar, kontakt.telefon, kontakt.email, kontakt.webstranica,
+              recenzije.korisnik, recenzije.ocjena, recenzije.komentar
+          FROM
+              (public.hoteli
+              LEFT JOIN public.adresa ON hoteli.adresaid = adresa.adresaid)
+              LEFT JOIN public.kontakt ON hoteli.kontaktid = kontakt.kontaktid
+              LEFT JOIN public.recenzije ON hoteli.idhotela = recenzije.hotelid
+          `
+      );
+      client.release();
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200);
+      const data = wrapData(result.rows);
+      const wrappedResponse = wrapResponse(data, 'Successfully fetched all data', 'OK');
+      res.json(wrappedResponse);
+
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500)
+    const wrappedResponse = wrapResponse(null, 'Failed to fetch all data', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+});
+
+//GET  -  dohvaćanje pojedinačnog resursa iz kolekcije temeljem jedinstvenog identifikatora resursa.
+app.get('/api/get/:id', async(req, res) => {
+
+  try {
+      const client = await pool.connect();
+      const result = await client.query(
+          `SELECT
+              hoteli.idhotela, hoteli.naziv, hoteli.lokacija, adresa.ulica, adresa.kucnibroj, adresa.postanskibroj,
+              hoteli.brojzvjezdica, hoteli.bazen, hoteli.restoran, hoteli.besplatanwifi, hoteli.kucniljubimci,
+              hoteli.fitnesscentar, hoteli.spawellnesscentar, kontakt.telefon, kontakt.email, kontakt.webstranica,
+              recenzije.korisnik, recenzije.ocjena, recenzije.komentar
+          FROM
+              (public.hoteli
+              LEFT JOIN public.adresa ON hoteli.adresaid = adresa.adresaid)
+              LEFT JOIN public.kontakt ON hoteli.kontaktid = kontakt.kontaktid
+              LEFT JOIN public.recenzije ON hoteli.idhotela = recenzije.hotelid
+              WHERE CAST(idhotela as TEXT) LIKE '${req.params.id}' 
+              `
+      );
+      client.release();
+
+      if(result.rowCount == 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(404);
+        const wrappedResponse = wrapResponse(null, 'No data found for the provided ID', 'Not found');
+        res.json(wrappedResponse);
+
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200);
+        const data = wrapData(result.rows);
+        const wrappedResponse = wrapResponse(data, 'Data successfully retrieved for the given ID', 'OK');      
+        res.json(wrappedResponse);
+      }
+    
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query for the provided ID', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+});
+
+//GET  - dohvaćanje pojedinačnog resursa iz kolekcije temeljem lokacije
+app.get('/api/getByLocation/:lokacija', async(req, res) => {
+  try {
+      const client = await pool.connect();
+      const result = await client.query(
+          `SELECT
+              hoteli.idhotela, hoteli.naziv, hoteli.lokacija, adresa.ulica, adresa.kucnibroj, adresa.postanskibroj,
+              hoteli.brojzvjezdica, hoteli.bazen, hoteli.restoran, hoteli.besplatanwifi, hoteli.kucniljubimci,
+              hoteli.fitnesscentar, hoteli.spawellnesscentar, kontakt.telefon, kontakt.email, kontakt.webstranica,
+              recenzije.korisnik, recenzije.ocjena, recenzije.komentar
+          FROM
+              (public.hoteli
+              LEFT JOIN public.adresa ON hoteli.adresaid = adresa.adresaid)
+              LEFT JOIN public.kontakt ON hoteli.kontaktid = kontakt.kontaktid
+              LEFT JOIN public.recenzije ON hoteli.idhotela = recenzije.hotelid
+          WHERE lokacija LIKE '%${req.params.lokacija}%' 
+          `
+      );
+      if(result.rowCount == 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(404);
+        const wrappedResponse = wrapResponse(null, 'No data found for the provided location', 'Not found');
+        res.json(wrappedResponse);
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200);
+        const data = wrapData(result.rows);
+        const wrappedResponse = wrapResponse(data, 'Data successfully retrieved for the given location', 'OK');      
+        res.json(wrappedResponse);
+      }
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query for the provided location', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+});
+
+//GET  - dohvaćanje pojedinačnog resursa iz kolekcije temeljem broja zvjezdica
+app.get('/api/getByStars/:brojzvjezdica', async(req, res) => {
+  try {
+      const client = await pool.connect();
+      const result = await client.query(
+          `SELECT
+              hoteli.idhotela, hoteli.naziv, hoteli.lokacija, adresa.ulica, adresa.kucnibroj, adresa.postanskibroj,
+              hoteli.brojzvjezdica, hoteli.bazen, hoteli.restoran, hoteli.besplatanwifi, hoteli.kucniljubimci,
+              hoteli.fitnesscentar, hoteli.spawellnesscentar, kontakt.telefon, kontakt.email, kontakt.webstranica,
+              recenzije.korisnik, recenzije.ocjena, recenzije.komentar
+          FROM
+              (public.hoteli
+              LEFT JOIN public.adresa ON hoteli.adresaid = adresa.adresaid)
+              LEFT JOIN public.kontakt ON hoteli.kontaktid = kontakt.kontaktid
+              LEFT JOIN public.recenzije ON hoteli.idhotela = recenzije.hotelid
+            WHERE CAST(brojzvjezdica as TEXT) LIKE '${req.params.brojzvjezdica}' 
+          `
+      );
+      client.release();
+      if(result.rowCount == 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(404);
+        const wrappedResponse = wrapResponse(null, 'No data found for the provided star rating', 'Not found');
+        res.json(wrappedResponse);
+
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200);
+        const data = wrapData(result.rows);
+        const wrappedResponse = wrapResponse(data, 'Data successfully retrieved for the given star rating', 'OK');      
+        res.json(wrappedResponse);
+      }          
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query for the provided star rating', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+});
+
+//GET  -  dohvaćanje pojedinačnog resursa iz kolekcije temeljem broja bazena
+app.get('/api/getByPools/:brojbazena', async(req, res) => {
+  try {
+      const client = await pool.connect();
+      const result = await client.query(
+          `SELECT
+              hoteli.idhotela, hoteli.naziv, hoteli.lokacija, adresa.ulica, adresa.kucnibroj, adresa.postanskibroj,
+              hoteli.brojzvjezdica, hoteli.bazen, hoteli.restoran, hoteli.besplatanwifi, hoteli.kucniljubimci,
+              hoteli.fitnesscentar, hoteli.spawellnesscentar, kontakt.telefon, kontakt.email, kontakt.webstranica,
+              recenzije.korisnik, recenzije.ocjena, recenzije.komentar
+          FROM
+              (public.hoteli
+              LEFT JOIN public.adresa ON hoteli.adresaid = adresa.adresaid)
+              LEFT JOIN public.kontakt ON hoteli.kontaktid = kontakt.kontaktid
+              LEFT JOIN public.recenzije ON hoteli.idhotela = recenzije.hotelid
+          WHERE CAST(bazen as TEXT) LIKE '%${req.params.brojbazena}%' 
+          `
+      );
+      client.release();
+      if(result.rowCount == 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(404);
+        const wrappedResponse = wrapResponse(null, 'No data found for the provided pool availability', 'Not found');
+        res.json(wrappedResponse);
+
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200);
+        const data = wrapData(result.rows);
+        const wrappedResponse = wrapResponse(data, 'Data successfully retrieved for the given pool availability', 'OK');      
+        res.json(wrappedResponse);
+      } 
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query for the provided pool availanility', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+});
+
+//POST  -  ubacivanje pojedinačnog resursa u kolekciju.
+app.post('/api/add', async(req, res) => {
+  try {
+    const {
+         naziv, lokacija, adresa, 
+        brojzvjezdica, bazen, restoran, besplatanwifi,
+        kucniljubimci, fitnesscentar, spawellnesscentar, kontakt, recenzije
+      } = req.body;
+
+      const { ulica, kucnibroj, postanskibroj } = adresa; 
+      const client = await pool.connect();
+
+      const insertedAddress = await client.query(
+        `INSERT INTO adresa (ulica, kucnibroj, postanskibroj) 
+        VALUES ($1, $2, $3) 
+        RETURNING *`,
+        [ulica, kucnibroj, postanskibroj]
+      );
+      const adresaid = insertedAddress.rows[0].adresaid;
+
+      const insertedContact = await client.query(
+        `INSERT INTO kontakt (telefon, email, webstranica) 
+        VALUES ($1, $2, $3) 
+        RETURNING *`,
+        [kontakt.telefon, kontakt.email, kontakt.webstranica]
+      );
+
+      const kontaktid = insertedContact.rows[0].kontaktid;
+
+      const result = await client.query(
+      `INSERT INTO hoteli (naziv, lokacija, brojzvjezdica, bazen, restoran, besplatanwifi, kucniljubimci, 
+          fitnesscentar, spawellnesscentar, adresaid, kontaktid)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      RETURNING idhotela
+      `, [naziv, lokacija, brojzvjezdica, bazen, restoran, besplatanwifi, kucniljubimci, fitnesscentar, spawellnesscentar, adresaid, kontaktid]
+      );
+
+      const hotelId = result.rows[0].idhotela;
+      req.body = { hotelId, ...req.body };
+
+      for (const review of recenzije) {
+        await client.query(
+          `INSERT INTO recenzije (hotelid, korisnik, ocjena, komentar) 
+          VALUES ($1, $2, $3, $4)`,
+          [hotelId, review.korisnik, review.ocjena, review.komentar]
+        );
+      }
+      client.release();
+      res.setHeader('Content-Type', 'application/json');
+      res.status(201);
+      const wrappedResponse = wrapResponse(req.body, 'Successfully added data', 'Created');
+      res.json(wrappedResponse);
+      
+
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query', 'Internal Server Error');
+    res.json(wrappedResponse);
+
+  }
+
+});
+
+//PUT  -  osvježavanje elemenata resursa.
+app.put('/api/update/:id', async(req, res) => {
+  const hotelId = req.params.id;
+  var query =  `UPDATE hoteli SET `;
+  const body = req.body;
+  const keys = Object.keys(body);
+  let setValues = '';
+
+  try {
+      const client = await pool.connect();
+
+      keys.forEach((key, index) => {
+        if(key == 'idhotela') return;
+        setValues += `${key} = `;
+        setValues += typeof body[key] === 'string' ? `'${body[key]}', ` : `${body[key]}, `;
+      })
+
+      // Uklanjanje zadnjeg zareza i razmaka
+      setValues = setValues.slice(0, -2);
+      query += setValues;
+      query += `WHERE CAST(idhotela as TEXT) LIKE '%${req.params.id}%' `;
+
+      const result = await client.query(query);
+    
+      if (result.rowCount == 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(404);
+        const wrappedResponse = wrapResponse(null, 'No data found for the provided ID', 'Not found');
+        res.json(wrappedResponse);
+
+      } else {
+        const rows = await client.query(`SELECT * FROM hoteli WHERE CAST(idhotela as TEXT) LIKE '%${req.params.id}%'`)
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200);
+        const wrappedResponse = wrapResponse(rows.rows, 'Data successfully updated', 'OK');
+        res.json(wrappedResponse);
+      }
+      client.release();
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+
+});
+
+//DELETE  -  brisanje pojedinog resursa iz kolekcije temeljem jedinstvenog identifikatora resursa.
+app.delete('/api/delete/:id', async(req, res) => {
+  const hotelId = req.params.id;
+
+  try {
+    const client = await pool.connect();
+
+   // Obriši hotel
+    const rows =  await client.query( `SELECT * FROM hoteli WHERE CAST(idhotela as TEXT) LIKE '%${req.params.id}%' `);
+   
+    console.log(rows.rows);
+    const result = await client.query('DELETE FROM hoteli WHERE idhotela = $1', [hotelId]);
+
+    if(result.rowCount == 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(404);
+        const wrappedResponse = wrapResponse(null, 'No data found for the provided ID', 'Not found');
+        res.json(wrappedResponse);
+    } else {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200);
+      const wrappedResponse = wrapResponse(rows.rows, 'Data successfully deleted', 'OK');
+      res.json(wrappedResponse);
+    }
+  
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query', 'Internal Server Error');
+    res.json(wrappedResponse);
+  }
+
+});
+
+app.get('/api/specification', async(req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200);
+  const wrappedResponse = wrapResponse(OpenApi, 'OpenApi specifikacija', 'OK');
+  res.json(wrappedResponse);
+});
+
+
+app.listen(port, () => {
+  console.log(`Server je pokrenut na http://localhost:${port}`);
+});
