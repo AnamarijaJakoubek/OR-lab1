@@ -4,7 +4,7 @@
   Anamarija Jakoubek
 # Licenca 
 Creative Commons Zero v1.0 Universal
-# Verzija: 2.0
+# Verzija: 3.0
 # Jezik: Hrvatski
 # Godina prikupljanja podataka: 2023
 # Prostorni obuhvat:
