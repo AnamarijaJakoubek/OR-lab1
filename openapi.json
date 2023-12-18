@@ -1,0 +1,852 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Hoteli API",
+      "version": "1.0.0",
+      "description": "API za dohvaćanje podataka o hotelima",
+      "contact": {
+        "name": "Anamarija Jakoubek",
+        "email": "aj53874r@fer.hr",
+        "url": "https://github.com/AnamarijaJakoubek/"
+      },
+      "license": {
+        "name": "Creative Commons Zero v1.0 Universal",
+        "url": "https://github.com/AnamarijaJakoubek/OR-lab1/blob/main/LICENSE"
+      }
+    },
+    "paths": {
+      "/api/getAll": {
+            "get": {
+              "summary": "Dohvati sve hotele iz baze",
+              "description": "Vraća sve hotele",
+              "responses": {
+                "200": {
+                  "description": "Uspješno dohvaćeni podatci",
+                  "content": {
+                    "application/json": {
+                        "example": {
+                          "status": "OK",
+                          "message": "Successfully fetched all data",
+                           "data": [
+                              {
+                                  "idhotela": 1,
+                                  "naziv": "D-Resort",
+                                  "lokacija": "Šibenik",
+                                  "adresa": {
+                                      "ulica": "Obala Jerka Šižgorića",
+                                      "kucnibroj": "1",
+                                      "postanskibroj": "22000"
+                                  },
+                                  "brojzvjezdica": 4,
+                                  "bazen": 2,
+                                  "restoran": 2,
+                                  "besplatanwifi": "Da",
+                                  "kucniljubimci": "Da",
+                                  "fitnesscentar": "Da",
+                                  "spawellnesscentar": "Da",
+                                  "kontakt": {
+                                      "telefon": "+385 22 331 452",
+                                      "email": "info@dresortsibenik.com",
+                                      "webstranica": "https://dresortsibenik.com/"
+                                  },
+                                  "recenzije": [
+                                    {
+                                        "korisnik": "Petra",
+                                        "ocjena": 4,
+                                        "komentar": "Bazen je bio odličan."
+                                    },
+                        {
+                            "korisnik": "Ivan",
+                            "ocjena": 5,
+                            "komentar": "Savršena usluga i restorani."
+                        },
+                        {
+                            "korisnik": "Lana",
+                            "ocjena": 4,
+                            "komentar": "Prekrasno mjesto uz more."
+                        }
+                                   ]
+                              },
+                              {
+                                  "idhotela": 2,
+                                  "naziv": "Sun Gardens",
+                                  "lokacija": "Dubrovnik",
+                                  "adresa": {
+                                      "ulica": "Na Moru",
+                                      "kucnibroj": "1",
+                                      "postanskibroj": "20235"
+                                  },
+                                  "brojzvjezdica": 5,
+                                  "bazen": 5,
+                                  "restoran": 6,
+                                  "besplatanwifi": "Da",
+                                  "kucniljubimci": "Ne",
+                                  "fitnesscentar": "Da",
+                                  "spawellnesscentar": "Da",
+                                  "kontakt": {
+                                      "telefon": "+385 (0)20 361 500",
+                                      "email": "info@sungardensdubrovnik.com",
+                                      "webstranica": "https://www.dubrovniksungardens.com/"
+                                  },
+                                  "recenzije": [
+                                      {
+                                          "korisnik": "Ivana",
+                                          "ocjena": 5,
+                                          "komentar": "Savršen odmor uz bazen."
+                                      },
+                                      {
+                                          "korisnik": "Nikola",
+                                          "ocjena": 3,
+                                          "komentar": "Pogled iz sobe nije bio impresivan."
+                                      },
+                                      {
+                                          "korisnik": "Mia",
+                                          "ocjena": 4,
+                                          "komentar": "Puno sadržaja za djecu."
+                                      }
+                                  ]
+                              }
+                            ]
+                        }
+                     }
+                  }
+                },
+                "500": {
+                  "description": "Internal Server Error",
+                  "content": {
+                    "application/json": {
+                        "example": {
+                          "status": "Internal Server Error",
+                          "message": "Failed to fetch all data",
+                           "data": null
+                        }
+                     }
+                  }
+                }
+              }
+            }
+          
+      },
+
+      "/api/get/{id}": {
+        "get": {
+            "summary": "Dohvati hotel iz baze po identifikatoru",
+            "description": "Vraća hotela za zadani identifikator",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "Identifikator hotela",
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Uspješno dohvaćeni podatci",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "status": "OK",
+                                "message": "Data successfully retrieved for the given ID",
+                                "data": {
+                                    "idhotela": 1,
+                                    "naziv": "D-Resort",
+                                    "lokacija": "Šibenik",
+                                    "adresa": {
+                                        "ulica": "Obala Jerka Šižgorića",
+                                        "kucnibroj": "1",
+                                        "postanskibroj": "22000"
+                                    },
+                                    "brojzvjezdica": 4,
+                                    "bazen": 2,
+                                    "restoran": 2,
+                                    "besplatanwifi": "Da",
+                                    "kucniljubimci": "Da",
+                                    "fitnesscentar": "Da",
+                                    "spawellnesscentar": "Da",
+                                    "kontakt": {
+                                        "telefon": "+385 22 331 452",
+                                        "email": "info@dresortsibenik.com",
+                                        "webstranica": "https://dresortsibenik.com/"
+                                    },
+                                    "recenzije": [
+                                        {
+                                            "korisnik": "Lana",
+                                            "ocjena": 4,
+                                            "komentar": "Prekrasno mjesto uz more."
+                                        },
+                                        {
+                                            "korisnik": "Ivan",
+                                            "ocjena": 5,
+                                            "komentar": "Savršena usluga i restorani."
+                                        },
+                                        {
+                                            "korisnik": "Petra",
+                                            "ocjena": 4,
+                                            "komentar": "Bazen je bio odličan."
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Podaci nisu pronađeni za zadani identifikator",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "status": "Not found",
+                                "message": "No data found for the provided ID",
+                                "data": null
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Internal Server Error",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "status": "Internal Server Error",
+                                "message": "Failed to execute query for the provided ID",
+                                "data": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      },
+
+      "/api/getByLocation/{lokacija}": {
+        "get": {
+          "summary": "Dohvati hotele iz baze za zadanu lokaciju",
+          "description": "Vraća hotele po lokaciji",
+          "parameters": [
+            {
+              "name": "lokacija",
+              "in": "path",
+              "required": true,
+              "description": "Lokacija hotela",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Uspješno dohvaćeni podatci",
+              "content": {
+                "application/json": {
+                    "example": {
+                      "status": "OK",
+                      "message": "Data successfully retrieved for the given location",
+                      "data": [
+                          {
+                              "idhotela": 5,
+                              "naziv": "Esplanade Zagreb",
+                              "lokacija": "Zagreb",
+                              "adresa": {
+                                  "ulica": "Mihanovićeva",
+                                  "kucnibroj": "1",
+                                  "postanskibroj": "10000"
+                              },
+                              "brojzvjezdica": 5,
+                              "bazen": 0,
+                              "restoran": 2,
+                              "besplatanwifi": "Da",
+                              "kucniljubimci": "Da",
+                              "fitnesscentar": "Da",
+                              "spawellnesscentar": "Da",
+                              "kontakt": {
+                                  "telefon": "00 385 1 45 666 66",
+                                  "email": "info@esplanade.hr",
+                                  "webstranica": "https://esplanade.hr/"
+                              },
+                              "recenzije": [
+                                  {
+                                      "korisnik": "Lucija",
+                                      "ocjena": 4,
+                                      "komentar": "Elegantan hotel u centru grada."
+                                  },
+                                  {
+                                      "korisnik": "Jakov",
+                                      "ocjena": 3,
+                                      "komentar": "Nedostatak besplatnog doručka."
+                                  },
+                                  {
+                                      "korisnik": "Elena",
+                                      "ocjena": 5,
+                                      "komentar": "Savršen boravak u luksuznom hotelu."
+                                  }
+                              ]
+                          }
+                      ]
+                    }
+                  }
+                }
+            },
+            "404": {
+              "description": "Podaci nisu pronađeni za zadanu lokaciju",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "status": "Not found",
+                    "message": "No data found for the provided location",
+                    "data": null
+                }
+                  }
+                }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                    "example": {
+                      "status": "Internal Server Error",
+                      "message": "Failed to execute query for the provided location",
+                       "data": null
+                    }
+                  }
+                }
+            }
+          }
+        }
+      },
+
+      "/api/getByStars/{brojzvjezdica}" :{
+        "get": {
+          "summary": "Dohvati hotele iz baze za zadani broj zvjezdica",
+          "description": "Vraća hotele po broju zvjezdica",
+          "parameters": [
+            {
+              "name": "brojzvjezdica",
+              "in": "path",
+              "required": true,
+              "description": "Broj zvjezdica",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Uspješno dohvaćeni podatci",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "OK",
+                        "message": "Data successfully retrieved for the given star rating",
+                        "data": [
+                          {
+                              "idhotela": 1,
+                              "naziv": "D-Resort",
+                              "lokacija": "Šibenik",
+                              "adresa": {
+                                  "ulica": "Obala Jerka Šižgorića",
+                                  "kucnibroj": "1",
+                                  "postanskibroj": "22000"
+                              },
+                              "brojzvjezdica": 4,
+                              "bazen": 2,
+                              "restoran": 2,
+                              "besplatanwifi": "Da",
+                              "kucniljubimci": "Da",
+                              "fitnesscentar": "Da",
+                              "spawellnesscentar": "Da",
+                              "kontakt": {
+                                  "telefon": "+385 22 331 452",
+                                  "email": "info@dresortsibenik.com",
+                                  "webstranica": "https://dresortsibenik.com/"
+                              },
+                              "recenzije": [
+                                  {
+                                      "korisnik": "Lana",
+                                      "ocjena": 4,
+                                      "komentar": "Prekrasno mjesto uz more."
+                                  },
+                                  {
+                                      "korisnik": "Ivan",
+                                      "ocjena": 5,
+                                      "komentar": "Savršena usluga i restorani."
+                                  },
+                                  {
+                                      "korisnik": "Petra",
+                                      "ocjena": 4,
+                                      "komentar": "Bazen je bio odličan."
+                                  }
+                              ]
+                          },
+                          {
+                              "idhotela": 9,
+                              "naziv": "Time Boutique",
+                              "lokacija": "Split",
+                              "adresa": {
+                                  "ulica": "Vukovarska",
+                                  "kucnibroj": "35b",
+                                  "postanskibroj": "21000"
+                              },
+                              "brojzvjezdica": 4,
+                              "bazen": 1,
+                              "restoran": 1,
+                              "besplatanwifi": "Da",
+                              "kucniljubimci": "Ne",
+                              "fitnesscentar": "Ne",
+                              "spawellnesscentar": "Da",
+                              "kontakt": {
+                                  "telefon": "+385 (0)95 222 9092",
+                                  "email": "info@hoteltimesplit.com",
+                                  "webstranica": "https://hoteltimesplit.com/"
+                              },
+                              "recenzije": [
+                                  {
+                                      "korisnik": "Lara",
+                                      "ocjena": 5,
+                                      "komentar": "Prekrasan pogled na more iz sobe."
+                                  },
+                                  {
+                                      "korisnik": "Ivan",
+                                      "ocjena": 4,
+                                      "komentar": "Usluga u restoranu bila dobra."
+                                  },
+                                  {
+                                      "korisnik": "Petra",
+                                      "ocjena": 5,
+                                      "komentar": "Osoblje je bilo iznimno susretljivo."
+                                  }
+                              ]
+                          }
+                        ]
+                    }
+                }
+            }
+            },
+            "404": {
+              "description": "Podaci nisu pronađeni za zadani broj zvjezdica",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Not found",
+                        "message": "No data found for the provided star rating",
+                        "data": null
+                    }
+                }
+            }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Internal Server Error",
+                        "message": "Failed to execute query for the provided star rating",
+                        "data": null
+                    }
+                }
+            }
+            }
+          }
+        }
+      },
+
+      "/api/getByPools/{brojbazena}": {
+        "get": {
+          "summary": "Dohvati hotele iz baze za zadani broj bazena",
+          "description": "Vraća hotele po broju bazena",
+          "parameters": [
+                {
+                  "name": "brojbazena",
+                  "in": "path",
+                  "required": true,
+                  "description": "Broj bazena",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+          "responses": {
+            "200": {
+              "description": "Uspješno dohvaćeni podatci",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "OK",
+                        "message": "Data successfully retrieved for the given pool availability",
+                        "data": [
+                          {
+                            "idhotela": 3,
+                            "naziv": "Villa Dubrovnik",
+                            "lokacija": "Ploče",
+                            "adresa": {
+                                "ulica": "Vlaha Bukovca",
+                                "kucnibroj": "6",
+                                "postanskibroj": "20000"
+                            },
+                            "brojzvjezdica": 5,
+                            "bazen": 1,
+                            "restoran": 1,
+                            "besplatanwifi": "Da",
+                            "kucniljubimci": "Da",
+                            "fitnesscentar": "Da",
+                            "spawellnesscentar": "Da",
+                            "kontakt": {
+                                "telefon": "+385 20 500 300",
+                                "email": "reservations@villa-dubrovnik.hr",
+                                "webstranica": "https://www.villa-dubrovnik.hr/hr/"
+                            },
+                            "recenzije": [
+                                {
+                                    "korisnik": "Klara",
+                                    "ocjena": 5,
+                                    "komentar": "Savršen odmor u Villi Dubrovnik!"
+                                },
+                                {
+                                    "korisnik": "Marko",
+                                    "ocjena": 4,
+                                    "komentar": "Lijepa plaža i restoran."
+                                },
+                                {
+                                    "korisnik": "Hrvoje",
+                                    "ocjena": 4,
+                                    "komentar": "Opuštajući spa centar."
+                                }
+                            ]
+                        }
+                        ]
+                    }
+                }
+              }
+            },
+            "404": {
+              "description": "Podaci nisu pronađeni za zadani broj bazenas",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Not found",
+                        "message": "No data found for the provided pool availability",
+                        "data": null
+                    }
+                }
+            }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Internal Server Error",
+                        "message": "Failed to execute query for the provided pool availanility",
+                        "data": null
+                    }
+                }
+            }
+            }
+          }
+        }
+      },
+
+      "/api/add": {
+        "post": {
+          "summary": "Dodaj novi hotel",
+          "description": "Stvara novi hotel",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "example":  {
+                  "naziv": "Florian&Godler",
+                  "lokacija": "Karlovac",
+                  "adresa": {
+                      "ulica": "Banija ulica",
+                      "kucnibroj": "15",
+                      "postanskibroj": "47000"
+                  },
+                  "brojzvjezdica": 4,
+                  "bazen": 0,
+                  "restoran": 1,
+                  "besplatanwifi": "Da",
+                  "kucniljubimci": "Ne",
+                  "fitnesscentar": "Ne",
+                  "spawellnesscentar": "Da",
+                  "kontakt": {
+                      "telefon": "+385 47 640138",
+                      "email": "info@floriangodler.hr",
+                      "webstranica": "https://floriangodler.hr/"
+                  },
+                  "recenzije": [
+                      {
+                          "korisnik": "Dino",
+                          "ocjena": 3,
+                          "komentar": "Dobar doručak, ali male sobe."
+                      },
+                      {
+                          "korisnik": "Mia",
+                          "ocjena": 5,
+                          "komentar": "Odlična lokacija u centru grada."
+                      },
+                      {
+                          "korisnik": "Filip",
+                          "ocjena": 4,
+                          "komentar": "Lijep vrt i terasa za opuštanje."
+                      }
+                  ]
+                 }
+                }
+              }
+          },
+          "responses": {
+            "201": {
+              "description": "Uspješno stvoren novi hotel",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Created",
+                        "message": "Successfully added data",
+                        "data": {
+                          "hotelId": 22,
+                          "naziv": "Florian&Godler",
+                          "lokacija": "Karlovac",
+                          "adresa": {
+                              "ulica": "Banija ulica",
+                              "kucnibroj": "15",
+                              "postanskibroj": "47000"
+                          },
+                          "brojzvjezdica": 4,
+                          "bazen": 0,
+                          "restoran": 1,
+                          "besplatanwifi": "Da",
+                          "kucniljubimci": "Ne",
+                          "fitnesscentar": "Ne",
+                          "spawellnesscentar": "Da",
+                          "kontakt": {
+                              "telefon": "+385 47 640138",
+                              "email": "info@floriangodler.hr",
+                              "webstranica": "https://floriangodler.hr/"
+                          },
+                          "recenzije": [
+                              {
+                                  "korisnik": "Dino",
+                                  "ocjena": 3,
+                                  "komentar": "Dobar doručak, ali male sobe."
+                              },
+                              {
+                                  "korisnik": "Mia",
+                                  "ocjena": 5,
+                                  "komentar": "Odlična lokacija u centru grada."
+                              },
+                              {
+                                  "korisnik": "Filip",
+                                  "ocjena": 4,
+                                  "komentar": "Lijep vrt i terasa za opuštanje."
+                              }
+                          ]
+                        }
+                    }
+                }
+            }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Internal Server Error",
+                        "message": "Failed to execute query",
+                        "data": null
+                    }
+                }
+            }
+            }
+          }
+        }
+      },
+
+      "/api/update/{id}": {
+        "put": {
+          "summary": "Ažuriraj hotel za zadani identifikator",
+          "description": "Ažurira hotele po identifikatoru",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "Identifikator hotela koji treba ažurirat",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "example": {
+                    "idhotela": 17,
+                    "naziv": "Hotel Ana",
+                    "lokacija": "Pozega",
+                    "brojzvjezdica": 5,
+                    "bazen": 1,
+                    "restoran": 2,
+                    "besplatanwifi": "Da",
+                    "kucniljubimci": "Da",
+                    "fitnesscentar": "Da",
+                    "spawellnesscentar": "Da" 
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Podatci uspješno ažurirani",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "OK",
+                        "message": "Data successfully updated",
+                        "data": [
+                          {
+                              "idhotela": 17,
+                              "naziv": "Hotel Ana",
+                              "lokacija": "Pozega",
+                              "brojzvjezdica": 5,
+                              "bazen": 1,
+                              "restoran": 2,
+                              "besplatanwifi": "Da",
+                              "kucniljubimci": "Da",
+                              "fitnesscentar": "Da",
+                              "spawellnesscentar": "Da",
+                              "adresaid": 21,
+                              "kontaktid": 2
+                          }
+                      ]
+                    }
+                }
+            }
+            },
+            "404": {
+              "description": "Podaci nisu pronađeni za zadani identifikator",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Not found",
+                        "message": "No data found for the provided ID'",
+                        "data": null
+                    }
+                }
+            }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Internal Server Error",
+                        "message": "Failed to execute query",
+                        "data": null
+                    }
+                }
+            }
+            }
+          }
+        }
+      },
+
+      "/api/delete/{id}": {
+        "delete": {
+          "summary": "Obriši hotel sa zadanim identifikatorom",
+          "description": "Briše hotele po identifikatoru",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "Identifikator hotela koji treba obrisati",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Podaci uspješno obrisani",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "OK",
+                        "message": "Data successfully deleted",
+                        "data":  [
+                          {
+                              "idhotela": 17,
+                              "naziv": "Hotel Ana",
+                              "lokacija": "Pozega",
+                              "brojzvjezdica": 5,
+                              "bazen": 1,
+                              "restoran": 2,
+                              "besplatanwifi": "Da",
+                              "kucniljubimci": "Da",
+                              "fitnesscentar": "Da",
+                              "spawellnesscentar": "Da",
+                              "adresaid": 21,
+                              "kontaktid": 3
+                          }
+                      ]
+                    }
+                }
+            }
+            },
+            "404": {
+              "description": "Podaci nisu pronađeni za zadani identifikator",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Not found",
+                        "message": "No data found for the provided ID",
+                        "data": null
+                    }
+                }
+            }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                    "example": {
+                        "status": "Internal Server Error",
+                        "message": "Failed to execute query",
+                        "data": null
+                    }
+                }
+            }
+            }
+          }
+        }
+      },
+
+      "/api/specification": {
+        "get": {
+          "summary": "Dohvati OpenAPI specifikaciju",
+          "description": "Vraća OpenAPI specifikaciju",
+          "responses": {
+            "200": {
+              "description": "Uspješno dohvaćena specifikacija",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "status": "OK",
+                    "message": "OpenApi specifikacija",
+                    "data":{ 
+                        "specification": "openApi.json" }
+                }
+              }
+            }
+          }
+        }
+      }
+      }    
+    }
+}
+  
+
