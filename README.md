@@ -1,5 +1,5 @@
 # Skup podataka o hotelima u Hrvatskoj
-  Druga laboratorijska vježba iz kolegija Otvoreno računarstvo
+  Treća laboratorijska vježba iz kolegija Otvoreno računarstvo
 # Autor
   Anamarija Jakoubek
 # Licenca 
