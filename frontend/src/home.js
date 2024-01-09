@@ -1,8 +1,106 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Metadata from './Metadata';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import exportFromJSON from 'export-from-json';
+
 
 const Home = () => {
+  const [selectedAttribute, setSelectedAttribute] = useState('wildcard');
+  const [filterText, setFilterText] = useState('');
+  const {isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const [data, setData] = useState([]);
+    var finalHotelsWithReviews = [];
+
+const formatData = () => {
+    var hotelsWithReviews = [];
+    for (const hotel of data) {
+        if (hotelsWithReviews.hasOwnProperty(hotel.idhotela)) {
+            const noviReview = {
+                korisnik: hotel.korisnik,
+                ocjena: hotel.ocjena,
+                komentar: hotel.komentar
+            }
+            hotelsWithReviews[hotel.idhotela].recenzije.push(noviReview);
+        } else {
+            hotelsWithReviews[hotel.idhotela]  = {
+                idhotela: hotel.idhotela,
+                naziv: hotel.naziv,
+                lokacija: hotel.lokacija,
+                adresa: {
+                    ulica: hotel.ulica,
+                    kucnibroj: hotel.kucnibroj,
+                    postanskibroj: hotel.postanskibroj
+                },
+                brojzvjezdica: hotel.brojzvjezdica,
+                bazen: hotel.bazen,
+                restoran: hotel.restoran,
+                besplatanwifi: hotel.besplatanwifi,
+                kucniljubimci: hotel.kucniljubimci,
+                fitnesscentar: hotel.fitnesscentar,
+                spawellnesscentar: hotel.spawellnesscentar,
+                kontakt: {
+                    telefon: hotel.telefon,
+                    email: hotel.email,
+                    webstranica: hotel.webstranica
+                },
+                recenzije: [
+                    {
+                        korisnik: hotel.korisnik,
+                        ocjena: hotel.ocjena,
+                        komentar: hotel.komentar
+                    }
+                ]
+                }
+        }
+    }
+ finalHotelsWithReviews = hotelsWithReviews.filter(Boolean);
+
+}
+
+const exportJSON = () => {
+  formatData();
+exportFromJSON({ data: { hoteli: finalHotelsWithReviews }, fileName: 'hoteli2', exportType: 'json' });
+};
+
+    
+const exportCSV = () => {
+    const fileName = 'hoteli2';
+    const exportType = exportFromJSON.types.csv;
+    exportFromJSON({data, fileName,  exportType});
+};
+
+  
+  const refresh =  () => {
+    const requestData = {
+      selectedAttribute: selectedAttribute,
+      filterText: filterText,
+    };
+  fetch(`/filter`, {
+    
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body : JSON.stringify(requestData),
+  })
+      .then((response) => {
+          if (!response.ok) {
+          throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then((fetchedData) => {
+          setData(fetchedData);
+          exportCSV();
+          exportJSON();
+      })
+      .catch((error) => {
+          console.error('Error fetching data:', error);
+      });
+
+  };
+
   return (
     <html lang="hr">
       <Metadata />
@@ -11,10 +109,30 @@ const Home = () => {
         <div className="flex flex-col items-center mb-6">
             <h1 className="text-4xl font-bold mb-4 text-blue-600">Skup podataka o hotelima u Hrvatskoj</h1>
 
-            <div className="bg-blue-50 p-2 rounded-md">
+            <div className="bg-blue-50 p-2 rounded-md flex gap-4">
+              {isAuthenticated && (
+                <Link to="/profile" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                  Korisnički profil
+                </Link> 
+              )}
+              {isAuthenticated && (
+                <button onClick={() => refresh()} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                  Osvježi preslike
+                </button> 
+                )}
               <Link to="/datatable" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
                 Pregledaj tablicu podataka
               </Link>
+              {!isAuthenticated && ( 
+              <button onClick={() => loginWithRedirect()} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                Prijava
+                </button>
+              )}
+              {isAuthenticated && (
+                <button onClick={() => logout( { returnTo: window.location.origin } )} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                 Odjava
+                </button> 
+                )}
             </div>
           </div>
           <div className="mb-8 bg-blue-50 p-6 rounded-md">
