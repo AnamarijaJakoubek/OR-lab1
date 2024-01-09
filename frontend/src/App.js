@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Auth0Provider
         domain="dev-dquphuv3kserjv4g.us.auth0.com"
-        clientId="8LE38Iar5B9uRNQhLfzQWbbSwtMCrcig"
+        clientId="d7qvc2ivPymzpGrJyOzP90BICHweOdag"
         redirectUri={window.location.origin}
         useRefreshTokens={true}
         cacheLocation="localstorage"

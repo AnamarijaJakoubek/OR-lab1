@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Metadata from './Metadata';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import exportFromJSON from 'export-from-json';
-
 
 const Home = () => {
   const [selectedAttribute, setSelectedAttribute] = useState('wildcard');
@@ -12,7 +11,22 @@ const Home = () => {
   const [data, setData] = useState([]);
     var finalHotelsWithReviews = [];
 
+    const context = {
+      "@context": {
+        "@vocab": "https://schema.org/",
+          "idhotela": "identifier",
+          "naziv": "name",
+          "brojzvjezdica": "starRating",
+          "telefon": "telephone",
+          "email": "email",
+          "webstranica": "url",
+      },
+      "@type": "Hotel"
+    };
+  
+
 const formatData = () => {
+ 
     var hotelsWithReviews = [];
     for (const hotel of data) {
         if (hotelsWithReviews.hasOwnProperty(hotel.idhotela)) {
@@ -40,6 +54,7 @@ const formatData = () => {
                 fitnesscentar: hotel.fitnesscentar,
                 spawellnesscentar: hotel.spawellnesscentar,
                 kontakt: {
+                  "@type": "ContactPoint",
                     telefon: hotel.telefon,
                     email: hotel.email,
                     webstranica: hotel.webstranica
@@ -55,12 +70,15 @@ const formatData = () => {
         }
     }
  finalHotelsWithReviews = hotelsWithReviews.filter(Boolean);
-
+  // return {
+  //   ...context,
+  //   hoteli: finalHotelsWithReviews
+  // };
 }
 
 const exportJSON = () => {
   formatData();
-exportFromJSON({ data: { hoteli: finalHotelsWithReviews }, fileName: 'hoteli2', exportType: 'json' });
+exportFromJSON({ data: { ...context, hoteli: finalHotelsWithReviews }, fileName: 'hoteli2', exportType: 'json' });
 };
 
     
@@ -100,6 +118,7 @@ const exportCSV = () => {
       });
 
   };
+
 
   return (
     <html lang="hr">
@@ -144,7 +163,7 @@ const exportCSV = () => {
               <strong>Licenca:</strong> Creative Commons Zero v1.0 Universal
             </p>
             <p className="text-gray-700">
-              <strong>Verzija:</strong> 2.0
+              <strong>Verzija:</strong> 4.0
             </p>
             <p className="text-gray-700">
               <strong>Jezik:</strong> Hrvatski
