@@ -4,13 +4,13 @@
   Anamarija Jakoubek
 # Licenca 
 Creative Commons Zero v1.0 Universal
-# Verzija: 3.0
+# Verzija: 4.0
 # Jezik: Hrvatski
 # Godina prikupljanja podataka: 2023
 # Prostorni obuhvat:
   Republika Hrvatska
 # Popis datoteka
-  hoteli.json, hoteli.csv, hoteli_dump.sql, LICENCE, README.md, schema.json, frontend, backend
+  hoteli.json, hoteli.csv, hoteli_dump.sql, LICENCE, README.md, schema.json, openapi.json, frontend, backend
 # Opis atributa
   -	Naziv: Naziv hotela
   - Lokacija: Grad/mjesto u kojem se hotel nalazi
