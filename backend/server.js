@@ -114,6 +114,19 @@ function wrapResponse(data, message, status) {
 }
 
 function wrapData(data) {
+  const context = {
+    "@context": {
+      "@vocab": "https://schema.org/",
+		    "idhotela": "identifier",
+		    "naziv": "name",
+		    "brojzvjezdica": "starRating",
+        "telefon": "telephone",
+        "email": "email",
+        "webstranica": "url",
+    },
+    "@type": "Hotel"
+  };
+
   var hotelsWithReviews = [];
   for (const hotel of data) {
       if (hotelsWithReviews.hasOwnProperty(hotel.idhotela)) {
@@ -141,6 +154,7 @@ function wrapData(data) {
               fitnesscentar: hotel.fitnesscentar,
               spawellnesscentar: hotel.spawellnesscentar,
               kontakt: {
+                 "@type": "ContactPoint",
                   telefon: hotel.telefon,
                   email: hotel.email,
                   webstranica: hotel.webstranica
@@ -156,12 +170,16 @@ function wrapData(data) {
       }
   }
 finalHotelsWithReviews = hotelsWithReviews.filter(Boolean);
-return finalHotelsWithReviews;
+return {
+   ...context,
+  hoteli: finalHotelsWithReviews
+};
 }
 
 
+
 //GET /api/getAll - Dohvacanje cjelokupne koleckcija podataka
-app.get('/api/getAll', async(req, res) => {
+app.get('/api/hoteli', async(req, res) => {
   
   try {
       const client = await pool.connect();
@@ -195,7 +213,7 @@ app.get('/api/getAll', async(req, res) => {
 });
 
 //GET  -  dohvaćanje pojedinačnog resursa iz kolekcije temeljem jedinstvenog identifikatora resursa.
-app.get('/api/get/:id', async(req, res) => {
+app.get('/api/hotel/:id', async(req, res) => {
 
   try {
       const client = await pool.connect();
@@ -239,7 +257,7 @@ app.get('/api/get/:id', async(req, res) => {
 });
 
 //GET  - dohvaćanje pojedinačnog resursa iz kolekcije temeljem lokacije
-app.get('/api/getByLocation/:lokacija', async(req, res) => {
+app.get('/api/hotel/lokacija/:lokacija', async(req, res) => {
   try {
       const client = await pool.connect();
       const result = await client.query(
@@ -278,7 +296,7 @@ app.get('/api/getByLocation/:lokacija', async(req, res) => {
 });
 
 //GET  - dohvaćanje pojedinačnog resursa iz kolekcije temeljem broja zvjezdica
-app.get('/api/getByStars/:brojzvjezdica', async(req, res) => {
+app.get('/api/hotel/zvjezdice/:brojzvjezdica', async(req, res) => {
   try {
       const client = await pool.connect();
       const result = await client.query(
@@ -319,7 +337,7 @@ app.get('/api/getByStars/:brojzvjezdica', async(req, res) => {
 });
 
 //GET  -  dohvaćanje pojedinačnog resursa iz kolekcije temeljem broja bazena
-app.get('/api/getByPools/:brojbazena', async(req, res) => {
+app.get('/api/hotel/bazeni/:brojbazena', async(req, res) => {
   try {
       const client = await pool.connect();
       const result = await client.query(
@@ -360,12 +378,12 @@ app.get('/api/getByPools/:brojbazena', async(req, res) => {
 });
 
 //POST  -  ubacivanje pojedinačnog resursa u kolekciju.
-app.post('/api/add', async(req, res) => {
+app.post('/api/hoteli', async(req, res) => {
   try {
     const {
          naziv, lokacija, adresa, 
         brojzvjezdica, bazen, restoran, besplatanwifi,
-        kucniljubimci, fitnesscentar, spawellnesscentar, kontakt, recenzije
+        kucniljubimci, fitnesscentar, spawellnesscentar, kontakt
       } = req.body;
 
       const { ulica, kucnibroj, postanskibroj } = adresa; 
@@ -399,13 +417,6 @@ app.post('/api/add', async(req, res) => {
       const hotelId = result.rows[0].idhotela;
       req.body = { hotelId, ...req.body };
 
-      for (const review of recenzije) {
-        await client.query(
-          `INSERT INTO recenzije (hotelid, korisnik, ocjena, komentar) 
-          VALUES ($1, $2, $3, $4)`,
-          [hotelId, review.korisnik, review.ocjena, review.komentar]
-        );
-      }
       client.release();
       res.setHeader('Content-Type', 'application/json');
       res.status(201);
@@ -424,8 +435,42 @@ app.post('/api/add', async(req, res) => {
 
 });
 
+app.post('/api/hoteli/recenzije/:id', async(req, res) => {
+  try {
+    const { korisnik, ocjena, komentar } = req.body;
+    const hotelId = req.params.id;
+
+      const client = await pool.connect();
+
+        const result = await client.query(
+          `INSERT INTO recenzije (hotelid, korisnik, ocjena, komentar) 
+          VALUES ($1, $2, $3, $4)`,
+          [hotelId, korisnik, ocjena, komentar]
+        );
+      const data = {
+        "hotelId" : hotelId,
+        ...req.body
+      }
+      client.release();
+      res.setHeader('Content-Type', 'application/json');
+      res.status(201);
+      const wrappedResponse = wrapResponse(data, 'Successfully added data', 'Created');
+      res.json(wrappedResponse);
+      
+
+  } catch (err) {
+    console.error('Error executing query', err);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    const wrappedResponse = wrapResponse(null, 'Failed to execute query', 'Internal Server Error');
+    res.json(wrappedResponse);
+
+  }
+ 
+}) 
+
 //PUT  -  osvježavanje elemenata resursa.
-app.put('/api/update/:id', async(req, res) => {
+app.put('/api/hotel/:id', async(req, res) => {
   const hotelId = req.params.id;
   var query =  `UPDATE hoteli SET `;
   const body = req.body;
@@ -473,7 +518,7 @@ app.put('/api/update/:id', async(req, res) => {
 });
 
 //DELETE  -  brisanje pojedinog resursa iz kolekcije temeljem jedinstvenog identifikatora resursa.
-app.delete('/api/delete/:id', async(req, res) => {
+app.delete('/api/hotel/:id', async(req, res) => {
   const hotelId = req.params.id;
 
   try {
@@ -515,6 +560,17 @@ app.get('/api/specification', async(req, res) => {
 });
 
 
+app.get('/refresh', async(req, res) => {
+    
+
+});
+
+
+
+
 app.listen(port, () => {
   console.log(`Server je pokrenut na http://localhost:${port}`);
 });
+
+
+//dodavanje hotela, recenzij
