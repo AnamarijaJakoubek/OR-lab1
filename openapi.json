@@ -15,7 +15,7 @@
       }
     },
     "paths": {
-      "/api/getAll": {
+      "/api/hoteli": {
             "get": {
               "summary": "Dohvati sve hotele iz baze",
               "description": "Vraća sve hotele",
@@ -128,7 +128,7 @@
           
       },
 
-      "/api/get/{id}": {
+      "/api/hotel/{id}": {
         "get": {
             "summary": "Dohvati hotel iz baze po identifikatoru",
             "description": "Vraća hotela za zadani identifikator",
@@ -222,7 +222,7 @@
         }
       },
 
-      "/api/getByLocation/{lokacija}": {
+      "/api/hotel/lokacija/{lokacija}": {
         "get": {
           "summary": "Dohvati hotele iz baze za zadanu lokaciju",
           "description": "Vraća hotele po lokaciji",
@@ -318,7 +318,7 @@
         }
       },
 
-      "/api/getByStars/{brojzvjezdica}" :{
+      "/api/hotel/zvjezdice/{brojzvjezdica}" :{
         "get": {
           "summary": "Dohvati hotele iz baze za zadani broj zvjezdica",
           "description": "Vraća hotele po broju zvjezdica",
@@ -453,7 +453,7 @@
         }
       },
 
-      "/api/getByPools/{brojbazena}": {
+      "/api/hotel/bazeni/{brojbazena}": {
         "get": {
           "summary": "Dohvati hotele iz baze za zadani broj bazena",
           "description": "Vraća hotele po broju bazena",
@@ -549,7 +549,7 @@
         }
       },
 
-      "/api/add": {
+      "/api/hoteli": {
         "post": {
           "summary": "Dodaj novi hotel",
           "description": "Stvara novi hotel",
@@ -664,7 +664,7 @@
         }
       },
 
-      "/api/update/{id}": {
+      "/api/hotel/{id}": {
         "put": {
           "summary": "Ažuriraj hotel za zadani identifikator",
           "description": "Ažurira hotele po identifikatoru",
@@ -754,7 +754,7 @@
         }
       },
 
-      "/api/delete/{id}": {
+      "/api/hotel/{id}": {
         "delete": {
           "summary": "Obriši hotel sa zadanim identifikatorom",
           "description": "Briše hotele po identifikatoru",
