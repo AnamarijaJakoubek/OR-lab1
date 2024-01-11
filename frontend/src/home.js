@@ -14,14 +14,21 @@ const Home = () => {
     const context = {
       "@context": {
         "@vocab": "https://schema.org/",
-          "idhotela": "identifier",
-          "naziv": "name",
-          "brojzvjezdica": "starRating",
-          "telefon": "telephone",
-          "email": "email",
-          "webstranica": "url",
+        "idhotela": "identifier",
+		    "naziv": "name",
+		    "brojzvjezdica": "starRating",
+        "telefon": "telephone",
+        "email": "email",
+        "webstranica": "url",
+        "lokacija": "location",
+        "adresa": "address",
+        "ulica": "streetAddress",
+        "kucnibroj": "streetAddress",
+        "postanskibroj": "postalCode",
+        "kucniljubimci": "petsAllowed",
+        "kontakt": "ContactPoint"
       },
-      "@type": "Hotel"
+      "@type": "LodgingBusiness"
     };
   
 
@@ -31,6 +38,7 @@ const formatData = () => {
     for (const hotel of data) {
         if (hotelsWithReviews.hasOwnProperty(hotel.idhotela)) {
             const noviReview = {
+              "@type": "Review",
                 korisnik: hotel.korisnik,
                 ocjena: hotel.ocjena,
                 komentar: hotel.komentar
@@ -38,10 +46,12 @@ const formatData = () => {
             hotelsWithReviews[hotel.idhotela].recenzije.push(noviReview);
         } else {
             hotelsWithReviews[hotel.idhotela]  = {
+              "@type": "Hotel",
                 idhotela: hotel.idhotela,
                 naziv: hotel.naziv,
                 lokacija: hotel.lokacija,
                 adresa: {
+                  "@type": "PostalAddress",
                     ulica: hotel.ulica,
                     kucnibroj: hotel.kucnibroj,
                     postanskibroj: hotel.postanskibroj
@@ -61,6 +71,7 @@ const formatData = () => {
                 },
                 recenzije: [
                     {
+                      "@type": "Review",
                         korisnik: hotel.korisnik,
                         ocjena: hotel.ocjena,
                         komentar: hotel.komentar
@@ -95,7 +106,6 @@ const exportCSV = () => {
       filterText: filterText,
     };
   fetch(`/filter`, {
-    
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -110,13 +120,13 @@ const exportCSV = () => {
       })
       .then((fetchedData) => {
           setData(fetchedData);
-          exportCSV();
-          exportJSON();
+         
       })
       .catch((error) => {
           console.error('Error fetching data:', error);
       });
-
+      exportJSON();
+      exportCSV();
   };
 
 
