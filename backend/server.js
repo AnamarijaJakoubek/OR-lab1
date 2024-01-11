@@ -123,14 +123,23 @@ function wrapData(data) {
         "telefon": "telephone",
         "email": "email",
         "webstranica": "url",
+        "lokacija": "location",
+        "adresa": "address",
+        "ulica": "streetAddress",
+        "kucnibroj": "streetAddress",
+        "postanskibroj": "postalCode",
+        "kucniljubimci": "petsAllowed",
+        "kontakt": "ContactPoint",
+        "recenzije": "Review"
     },
-    "@type": "Hotel"
+    "@type": "LodgingBusiness"
   };
 
   var hotelsWithReviews = [];
   for (const hotel of data) {
       if (hotelsWithReviews.hasOwnProperty(hotel.idhotela)) {
           const noviReview = {
+            "@type": "Review",
               korisnik: hotel.korisnik,
               ocjena: hotel.ocjena,
               komentar: hotel.komentar
@@ -138,10 +147,12 @@ function wrapData(data) {
           hotelsWithReviews[hotel.idhotela].recenzije.push(noviReview);
       } else {
           hotelsWithReviews[hotel.idhotela]  = {
+            "@type": "Hotel",
               idhotela: hotel.idhotela,
               naziv: hotel.naziv,
               lokacija: hotel.lokacija,
               adresa: {
+                "@type": "PostalAddress",
                   ulica: hotel.ulica,
                   kucnibroj: hotel.kucnibroj,
                   postanskibroj: hotel.postanskibroj
@@ -161,6 +172,7 @@ function wrapData(data) {
               },
               recenzije: [
                   {
+                    "@type": "Review",
                       korisnik: hotel.korisnik,
                       ocjena: hotel.ocjena,
                       komentar: hotel.komentar
